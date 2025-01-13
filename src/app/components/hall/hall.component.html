@@ -1,0 +1,9 @@
+<div class="hall-container">
+    <h2>Cinema Halls</h2>
+    
+    <div *ngFor="let hall of hallList; trackBy: trackByHallId" class="hall-card">
+      <h3>{{hall.name}}</h3>
+      <p>Capacity: {{hall.capacity}}</p>
+      <button (click)="deleteHall(hall.hallId)">Delete</button>
+    </div>
+</div>

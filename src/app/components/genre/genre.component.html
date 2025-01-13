@@ -1,0 +1,24 @@
+<div class="genre-container"></div>
+    <div class="form-section">
+        <h2>Create Genre</h2>
+        <form [formGroup]="genreForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <input type="text" placeholder="Genre Name" formControlName="genreName">
+            </div>
+            <button type="submit" class="submit-btn" [disabled]="!genreForm.valid">Create Genre</button>
+        </form>
+    </div>
+
+    <div class="genre-list">
+        <h2>Genres</h2>
+        <div class="genre-grid">
+            @for (genre of genreList; track genre.genreId) {
+                <div class="genre-box">
+                    <h3>ID: {{genre.genreId}} - {{genre.genreName}}</h3>
+                    <div class="button-group">
+                        <button class="delete-btn" (click)="deleteGenre(genre.genreId)">Delete</button>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>

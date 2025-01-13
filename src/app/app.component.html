@@ -1,0 +1,26 @@
+<div class="header">
+    <h1>Cinema</h1>
+    <div class="auth-buttons">
+        <button class="auth-btn" routerLink="/login">Login</button>
+        <button class="auth-btn">Admin</button>
+    </div>
+</div>
+
+<div class="sidebar">
+    <div class="box" routerLink="/home">
+        <h2>Home</h2>
+    </div>
+    <div class="box" routerLink="/movie">
+        <h2>Movie</h2>
+    </div>
+    <div class="box" routerLink="/genre">
+        <h2>Genre</h2>
+    </div>
+    <div class="box" routerLink="/user">
+        <h2>User</h2>
+    </div>
+</div>
+
+<div class="content">
+    <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,50 @@
+<div class="container">
+    <h1 class="heading">Cinema User</h1>
+    <table>
+        <thead>
+            <tr>
+                <th><label for="firstName">FirstName</label></th>
+                <th><label for="lastName">LastName</label></th>
+                <th><label for="email">eMail</label></th>
+                <th><label for="postalcodeId">PostalCodeId</label></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @for (userObj of userList; track $index) {
+            <tr>
+                <td>{{userObj.firstName}}</td>
+                <td>{{userObj.lastName}}</td>
+                <td>{{userObj.email}}</td>
+                <td>{{userObj.postalCodeId}}</td>
+                <td><button (click)="JuleNisse(userObj.userId)">Delete</button></td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <input type="text" placeholder="firstName" id="firstName" formControlName="firstName">
+        <div *ngIf="userForm.get('firstName')?.errors?.['required']">First name is required</div>
+    </div>
+    
+    <div class="form-group">
+        <input type="text" placeholder="lastName" id="lastName" formControlName="lastName">
+        <div *ngIf="userForm.get('lastName')?.errors?.['required']">Last name is required</div>
+    </div>
+    
+    <div class="form-group">
+        <input type="text" placeholder="email" id="email" formControlName="email">
+        <div *ngIf="userForm.get('email')?.errors?.['required']">Email is required</div>
+        <div *ngIf="userForm.get('email')?.errors?.['email']">Invalid email format</div>
+    </div>
+    
+    <div class="form-group">
+        <input type="number" placeholder="PostalCodeId" id="postalCodeId" formControlName="postalCodeId">
+        <div *ngIf="userForm.get('postalCodeId')?.errors?.['required']">Postal code is required</div>
+    </div>
+    
+    <button type="submit" [disabled]="!userForm.valid">Add user</button>
+</form>

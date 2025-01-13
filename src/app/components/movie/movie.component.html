@@ -1,0 +1,53 @@
+<div class="container"></div>
+    <h1 class="heading">Cinema Movies</h1>
+    
+    <form [formGroup]="movieForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <input type="text" placeholder="Title" id="title" formControlName="title">
+            <div *ngIf="movieForm.get('title')?.errors?.['required']">Title is required</div>
+        </div>
+        
+        <div class="form-group">
+            <input type="number" placeholder="Duration (minutes)" id="durationMinutes" formControlName="durationMinutes">
+            <div *ngIf="movieForm.get('durationMinutes')?.errors?.['required']">Duration is required</div>
+        </div>
+        
+        <div class="form-group">
+            <input type="number" placeholder="Rating (1-10)" id="rating" formControlName="rating">
+            <div *ngIf="movieForm.get('rating')?.errors?.['required']">Rating is required</div>
+        </div>
+        
+        <div class="form-group">
+            <input type="date" placeholder="Release Date" id="releaseDate" formControlName="releaseDate">
+            <div *ngIf="movieForm.get('releaseDate')?.errors?.['required']">Release date is required</div>
+        </div>
+        
+        <button type="submit" [disabled]="!movieForm.valid">Add Movie</button>
+    </form>
+
+    <h2>Movies List</h2>
+    <div *ngIf="movieList.length > 0">
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Duration (min)</th>
+                    <th>Rating</th>
+                    <th>Release Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (movie of movieList; track movie.movieId) {
+                <tr>
+                    <td>{{movie.title}}</td>
+                    <td>{{movie.durationMinutes}}</td>
+                    <td>{{movie.rating}}</td>
+                    <td>{{movie.releaseDate | date:'mediumDate'}}</td>
+                    <td><button (click)="deleteMovie(movie.movieId)">Delete</button></td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="movieList.length === 0">No movies found</div>
