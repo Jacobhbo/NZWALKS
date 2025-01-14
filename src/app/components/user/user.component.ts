@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class UserComponent implements OnInit {
   userList: User[] = [];
+  postalCodes: any[] = [];
 
   userForm: FormGroup = new FormGroup({
     userId: new FormControl(),
@@ -27,10 +28,32 @@ export class UserComponent implements OnInit {
   constructor(private service: UserService) {}
 
   ngOnInit() {
-    // Load users
+    this.loadPostalCodes();
+    this.loadUsers();
+  }
+
+  loadPostalCodes() {
+    this.service.getPostalCodes().subscribe({
+      next: (data) => {
+        this.postalCodes = data;
+        this.loadUsers();
+      },
+      error: (error) => console.error('Error loading postal codes:', error)
+    });
+  }
+
+  getPostalCodeName(postalCodeId: number): string {
+    const postalCode = this.postalCodes.find(p => p.postalCodeId === postalCodeId);
+    return postalCode ? postalCode.name : postalCodeId.toString();
+  }
+
+  private loadUsers(): void {
     this.service.getall3().subscribe({
-      next: data => this.userList = data,
-      error: err => console.error('Error loading users:', err)
+      next: (data) => {
+        console.log('Users loaded:', data);
+        this.userList = data;
+      },
+      error: (error) => console.error('Error loading users:', error)
     });
   }
 
@@ -45,15 +68,11 @@ export class UserComponent implements OnInit {
       this.service.addUser(newUser).subscribe({
         next: (response) => {
           console.log('User added successfully:', response);
-          this.service.getall3().subscribe(data => {
-            console.log('Updated user list:', data);
-            this.userList = data;
-          });
+          this.loadUsers();
           this.userForm.reset();
         },
         error: (err) => {
           console.error('Error adding user:', err);
-          // Add user feedback here
         },
       });
     } else {

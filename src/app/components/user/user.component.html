@@ -6,7 +6,7 @@
                 <th><label for="firstName">FirstName</label></th>
                 <th><label for="lastName">LastName</label></th>
                 <th><label for="email">eMail</label></th>
-                <th><label for="postalcodeId">PostalCodeId</label></th>
+                <th><label for="postalcodeId">Postal Code</label></th>
             </tr>
         </thead>
 
@@ -16,7 +16,7 @@
                 <td>{{userObj.firstName}}</td>
                 <td>{{userObj.lastName}}</td>
                 <td>{{userObj.email}}</td>
-                <td>{{userObj.postalCodeId}}</td>
+                <td>{{getPostalCodeName(userObj.postalCodeId)}}</td>
                 <td><button (click)="JuleNisse(userObj.userId)">Delete</button></td>
             </tr>
             }
