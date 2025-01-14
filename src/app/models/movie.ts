@@ -4,4 +4,6 @@ export class Movie {
     durationMinutes: number = 0;
     rating: number = 0;
     releaseDate: Date = new Date();
+    posterUrl: string = "";
+    imageUrl: string = "";
 }

@@ -1,14 +1,16 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../service/auth.service'; // Import the AuthService
+
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
+
 })
 export class LoginComponent {
   loginForm: FormGroup = new FormGroup({

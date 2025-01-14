@@ -2,7 +2,8 @@
 <div class="header">
     <h1>Cinema</h1>
     <div class="auth-buttons">
-        <button class="auth-btn" routerLink="/login">Login</button>
+        <button class="auth-btn" *ngIf="isLoggedIn()" (click)="logout()">Logout</button>
+        <button class="auth-btn" *ngIf="!isLoggedIn()" routerLink="/login">Login</button>
         <button class="auth-btn">Admin</button>
     </div>
 </div>

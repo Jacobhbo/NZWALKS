@@ -1,17 +1,13 @@
 <div class="stats-container">
     <h1>Welcome to Cinema</h1>
     
-    <div class="stats-grid">
-        <div class="stat-card">
-            <h2>Users</h2>
-            <div class="stat-number">{{userCount}}</div>
-            <button routerLink="/user">Manage Users</button>
-        </div>
-
-        <div class="stat-card">
-            <h2>Movies</h2>
-            <div class="stat-number">{{movieCount}}</div>
-            <button routerLink="/movie">Manage Movies</button>
+    <div class="movies-grid">
+        <div *ngFor="let movie of movieList" class="movie-box">
+            <img [src]="movie.imageUrl" alt="{{movie.title}} Poster" class="movie-poster">
+            <h3>{{movie.title}}</h3>
+            <p>Duration: {{movie.durationMinutes}} min</p>
+            <p>Rating: {{movie.rating}}</p>
+            <p>Release Date: {{movie.releaseDate | date:'mediumDate'}}</p>
         </div>
     </div>
 </div>

@@ -32,3 +32,9 @@ button {
 button:hover {
     background-color: #45a049;
 }
+
+.register-link a {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}

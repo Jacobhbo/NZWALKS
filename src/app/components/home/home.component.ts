@@ -3,6 +3,7 @@ import { UserService } from '../../service/user.service';
 import { MovieService } from '../../service/movie.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { Movie } from '../../models/movie';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +15,7 @@ import { RouterModule } from '@angular/router';
 export class HomeComponent implements OnInit {
   userCount: number = 0;
   movieCount: number = 0;
+  movieList: Movie[] = [];
 
   constructor(
     private userService: UserService,
@@ -31,6 +33,20 @@ export class HomeComponent implements OnInit {
 
     this.movieService.getAllMovies().subscribe(movies => {
       this.movieCount = movies.length;
+    });
+  }
+
+  public loadMovies() {
+    this.movieService.getAllMovies().subscribe({
+      next: (data) => {
+        this.movieList = data.map(movie => ({
+          ...movie,
+          imageUrl: 'pictures/image.png'
+        }));
+      },
+      error: (error) => {
+        console.error('Error loading movies:', error);
+      }
     });
   }
 }
